@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: Valora hooks nfts API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  version: 1.0.0
+  contact:
+    url: https://github.com/divvi-xyz/hooks
+  x-provenance:
+    generated: '2026-07-21'
+    method: derived
+    source: https://github.com/divvi-xyz/hooks (src/api/index.ts, src/runtime/simulateTransactions.ts, src/utils/prepareSwapTransactions.ts, src/apps/hedgey/nfts.ts)
+    probes:
+    - url: https://api.mainnet.valora.xyz/getTokensInfoWithPrices
+      status: 200
+    - url: https://api.mainnet.valora.xyz/hooks-api/getShortcuts
+      status: 200
+    - url: https://api.mainnet.valora.xyz/getSwapQuote
+      status: 400
+servers:
+- url: https://api.mainnet.valora.xyz
+  description: Production (mainnet networks)
+- url: https://api.alfajores.valora.xyz
+  description: Staging (Celo Alfajores and other testnets)
+tags:
+- name: nfts
+  description: NFTs held by an address
+paths:
+  /getNfts:
+    get:
+      operationId: getNfts
+      tags:
+      - nfts
+      summary: List NFTs for an address
+      description: Returns NFTs held by a wallet address, paginated with a pageKey cursor.
+      parameters:
+      - name: address
+        in: query
+        required: true
+        schema:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      - name: pageKey
+        in: query
+        required: false
+        description: Cursor returned by the previous page.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Page of NFTs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Nft'
+                  pageKey:
+                    type: string
+                    description: Cursor for the next page; absent on the last page.
+        '400':
+          description: Missing or invalid address.
+components:
+  schemas:
+    Nft:
+      type: object
+      properties:
+        contractAddress:
+          type: string
+        tokenId:
+          type: string
+        metadata:
+          type: object
+          properties:
+            image:
+              type: string
+          additionalProperties: true
+        media:
+          type: array
+          items:
+            type: object
+            properties:
+              raw:
+                type: string
+              gateway:
+                type: string
+      additionalProperties: true

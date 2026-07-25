@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Valora hooks transactions API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  version: 1.0.0
+  contact:
+    url: https://github.com/divvi-xyz/hooks
+  x-provenance:
+    generated: '2026-07-21'
+    method: derived
+    source: https://github.com/divvi-xyz/hooks (src/api/index.ts, src/runtime/simulateTransactions.ts, src/utils/prepareSwapTransactions.ts, src/apps/hedgey/nfts.ts)
+    probes:
+    - url: https://api.mainnet.valora.xyz/getTokensInfoWithPrices
+      status: 200
+    - url: https://api.mainnet.valora.xyz/hooks-api/getShortcuts
+      status: 200
+    - url: https://api.mainnet.valora.xyz/getSwapQuote
+      status: 400
+servers:
+- url: https://api.mainnet.valora.xyz
+  description: Production (mainnet networks)
+- url: https://api.alfajores.valora.xyz
+  description: Staging (Celo Alfajores and other testnets)
+tags:
+- name: transactions
+  description: Transaction simulation
+paths:
+  /simulateTransactions:
+    post:
+      operationId: simulateTransactions
+      tags:
+      - transactions
+      summary: Simulate transactions
+      description: Simulates a batch of transactions on the given network and returns per-transaction gas estimates.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - transactions
+              - networkId
+              properties:
+                transactions:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Transaction'
+                networkId:
+                  $ref: '#/components/schemas/NetworkId'
+      responses:
+        '200':
+          description: Simulation results.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum:
+                    - OK
+                  simulatedTransactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SimulatedTransaction'
+        '400':
+          description: Valid but unsupported request (e.g. unsupported networkId).
+components:
+  schemas:
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
+    SimulatedTransaction:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        blockNumber:
+          type: string
+        gasNeeded:
+          type: number
+        gasUsed:
+          type: number
+        gasPrice:
+          type: string
+    Transaction:
+      type: object
+      required:
+      - networkId
+      - from
+      - to
+      - data
+      properties:
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        from:
+          type: string
+        to:
+          type: string
+        data:
+          type: string
+        value:
+          type: string
+          description: Serialized bigint (wei).
+        gas:
+          type: string
+          description: Serialized bigint (wei).
+        estimatedGasUse:
+          type: string
+          description: Serialized bigint (wei).

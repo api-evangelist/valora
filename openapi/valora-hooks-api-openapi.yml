@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: Valora hooks API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  version: 1.0.0
+  contact:
+    url: https://github.com/divvi-xyz/hooks
+  x-provenance:
+    generated: '2026-07-21'
+    method: derived
+    source: https://github.com/divvi-xyz/hooks (src/api/index.ts, src/runtime/simulateTransactions.ts, src/utils/prepareSwapTransactions.ts, src/apps/hedgey/nfts.ts)
+    probes:
+    - url: https://api.mainnet.valora.xyz/getTokensInfoWithPrices
+      status: 200
+    - url: https://api.mainnet.valora.xyz/hooks-api/getShortcuts
+      status: 200
+    - url: https://api.mainnet.valora.xyz/getSwapQuote
+      status: 400
+servers:
+- url: https://api.mainnet.valora.xyz
+  description: Production (mainnet networks)
+- url: https://api.alfajores.valora.xyz
+  description: Staging (Celo Alfajores and other testnets)
+tags:
+- name: hooks
+  description: Divvi Hooks API (positions and shortcuts), served under /hooks-api
+paths:
+  /hooks-api/getPositions:
+    get:
+      operationId: getPositions
+      tags:
+      - hooks
+      summary: Get DeFi positions
+      description: Returns app-token and contract positions (DeFi holdings) detected by position-pricing hooks, optionally filtered to a wallet address and app ids.
+      parameters:
+      - $ref: '#/components/parameters/networkIds'
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      - name: appIds
+        in: query
+        required: false
+        description: Filter to specific hook app ids (repeatable).
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Positions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    enum:
+                    - OK
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'
+        '400':
+          description: Invalid request parameters.
+  /hooks-api/getEarnPositions:
+    get:
+      operationId: getEarnPositions
+      tags:
+      - hooks
+      summary: Get positions for the Earn feature
+      parameters:
+      - $ref: '#/components/parameters/networkIds'
+      - name: supportedPools
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: supportedAppIds
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Earn positions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    enum:
+                    - OK
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Position'
+        '400':
+          description: Invalid request parameters.
+  /hooks-api/getShortcuts:
+    get:
+      operationId: getShortcuts
+      deprecated: true
+      tags:
+      - hooks
+      summary: List shortcuts (deprecated)
+      description: Deprecated route (celo-mainnet only) — use /hooks-api/v2/getShortcuts.
+      responses:
+        '200':
+          description: Shortcuts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortcutsResponse'
+  /hooks-api/v2/getShortcuts:
+    get:
+      operationId: getShortcutsV2
+      tags:
+      - hooks
+      summary: List shortcuts
+      description: Returns shortcut definitions (claim, deposit, withdraw, swap-deposit actions) available on the requested networks.
+      parameters:
+      - $ref: '#/components/parameters/networkIds'
+      - name: address
+        in: query
+        required: false
+        schema:
+          type: string
+          pattern: ^0x[a-fA-F0-9]{40}$
+      - name: appIds
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Shortcuts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShortcutsResponse'
+        '400':
+          description: Invalid request parameters.
+  /hooks-api/triggerShortcut:
+    post:
+      operationId: triggerShortcut
+      tags:
+      - hooks
+      summary: Trigger a shortcut
+      description: Executes a shortcut's trigger and returns the transaction(s) the user must sign. Additional body fields are required per-shortcut (triggerInputShape), e.g. tokens for deposit/withdraw shortcuts.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - address
+              - appId
+              - shortcutId
+              - networkId
+              properties:
+                address:
+                  type: string
+                  pattern: ^0x[a-fA-F0-9]{40}$
+                appId:
+                  type: string
+                shortcutId:
+                  type: string
+                networkId:
+                  $ref: '#/components/schemas/NetworkId'
+              additionalProperties: true
+      responses:
+        '200':
+          description: Transactions to sign plus shortcut-specific output.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    enum:
+                    - OK
+                  data:
+                    type: object
+                    properties:
+                      transactions:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Transaction'
+                    additionalProperties: true
+        '400':
+          description: Unknown shortcut id or invalid trigger input.
+components:
+  schemas:
+    PositionToken:
+      type: object
+      description: Token held by a position (base token or nested app token).
+      properties:
+        tokenId:
+          type: string
+        address:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        priceUsd:
+          type: string
+        balance:
+          type: string
+        type:
+          type: string
+          enum:
+          - base-token
+          - app-token
+        category:
+          type: string
+          enum:
+          - claimable
+      additionalProperties: true
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
+    ShortcutsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          enum:
+          - OK
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shortcut'
+    Position:
+      type: object
+      description: DeFi position (app-token or contract-position) priced by a hook.
+      required:
+      - positionId
+      - address
+      - networkId
+      - appId
+      - type
+      properties:
+        positionId:
+          type: string
+          description: Opaque unique id, e.g. celo-mainnet:0x....
+        address:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        appId:
+          type: string
+        appName:
+          type: string
+        label:
+          type: string
+          deprecated: true
+        type:
+          type: string
+          enum:
+          - app-token
+          - contract-position
+        displayProps:
+          $ref: '#/components/schemas/DisplayProps'
+        dataProps:
+          type: object
+          additionalProperties: true
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/PositionToken'
+        availableShortcutIds:
+          type: array
+          items:
+            type: string
+        shortcutTriggerArgs:
+          type: object
+          additionalProperties: true
+        balanceUsd:
+          type: string
+          description: contract-position only.
+        supply:
+          type: string
+          description: app-token only.
+        pricePerShare:
+          type: array
+          items:
+            type: string
+          description: app-token only.
+      additionalProperties: true
+    DisplayProps:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        manageUrl:
+          type: string
+    Transaction:
+      type: object
+      required:
+      - networkId
+      - from
+      - to
+      - data
+      properties:
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        from:
+          type: string
+        to:
+          type: string
+        data:
+          type: string
+        value:
+          type: string
+          description: Serialized bigint (wei).
+        gas:
+          type: string
+          description: Serialized bigint (wei).
+        estimatedGasUse:
+          type: string
+          description: Serialized bigint (wei).
+    Shortcut:
+      type: object
+      description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        networkIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkId'
+        category:
+          type: string
+          enum:
+          - claim
+          - deposit
+          - withdraw
+          - swap-deposit
+      additionalProperties: true
+  parameters:
+    networkIds:
+      name: networkIds
+      in: query
+      required: true
+      description: One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted.
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/NetworkId'

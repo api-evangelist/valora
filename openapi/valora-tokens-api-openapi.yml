@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: Valora hooks tokens API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  version: 1.0.0
+  contact:
+    url: https://github.com/divvi-xyz/hooks
+  x-provenance:
+    generated: '2026-07-21'
+    method: derived
+    source: https://github.com/divvi-xyz/hooks (src/api/index.ts, src/runtime/simulateTransactions.ts, src/utils/prepareSwapTransactions.ts, src/apps/hedgey/nfts.ts)
+    probes:
+    - url: https://api.mainnet.valora.xyz/getTokensInfoWithPrices
+      status: 200
+    - url: https://api.mainnet.valora.xyz/hooks-api/getShortcuts
+      status: 200
+    - url: https://api.mainnet.valora.xyz/getSwapQuote
+      status: 400
+servers:
+- url: https://api.mainnet.valora.xyz
+  description: Production (mainnet networks)
+- url: https://api.alfajores.valora.xyz
+  description: Staging (Celo Alfajores and other testnets)
+tags:
+- name: tokens
+  description: Token metadata and prices
+paths:
+  /getTokensInfoWithPrices:
+    get:
+      operationId: getTokensInfoWithPrices
+      tags:
+      - tokens
+      summary: Get supported tokens with metadata and prices
+      description: Returns a map of tokenId to token info for all tokens Valora supports.
+      responses:
+        '200':
+          description: Map of tokenId to token info.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/TokenInfo'
+components:
+  schemas:
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
+    TokenInfo:
+      type: object
+      description: Token metadata and price (observed live from /getTokensInfoWithPrices).
+      properties:
+        tokenId:
+          type: string
+          description: Network-scoped token id, e.g. celo-mainnet:0x....
+        address:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        imageUrl:
+          type: string
+        infoUrl:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        networkIconUrl:
+          type: string
+        isNative:
+          type: boolean
+        priceUsd:
+          type: string
+      additionalProperties: true

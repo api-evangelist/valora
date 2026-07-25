@@ -1,0 +1,126 @@
+openapi: 3.0.3
+info:
+  title: Valora hooks swaps API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  version: 1.0.0
+  contact:
+    url: https://github.com/divvi-xyz/hooks
+  x-provenance:
+    generated: '2026-07-21'
+    method: derived
+    source: https://github.com/divvi-xyz/hooks (src/api/index.ts, src/runtime/simulateTransactions.ts, src/utils/prepareSwapTransactions.ts, src/apps/hedgey/nfts.ts)
+    probes:
+    - url: https://api.mainnet.valora.xyz/getTokensInfoWithPrices
+      status: 200
+    - url: https://api.mainnet.valora.xyz/hooks-api/getShortcuts
+      status: 200
+    - url: https://api.mainnet.valora.xyz/getSwapQuote
+      status: 400
+servers:
+- url: https://api.mainnet.valora.xyz
+  description: Production (mainnet networks)
+- url: https://api.alfajores.valora.xyz
+  description: Staging (Celo Alfajores and other testnets)
+tags:
+- name: swaps
+  description: Swap quotes
+paths:
+  /getSwapQuote:
+    post:
+      operationId: getSwapQuote
+      tags:
+      - swaps
+      summary: Get a swap quote
+      description: Returns an unvalidated swap transaction for a proposed token swap (used by the wallet and by swap-deposit shortcuts).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwapQuoteRequest'
+      responses:
+        '200':
+          description: Swap quote.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwapQuoteResponse'
+        '400':
+          description: Invalid or unsupported swap request.
+components:
+  schemas:
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
+    SwapQuoteResponse:
+      type: object
+      properties:
+        unvalidatedSwapTransaction:
+          type: object
+          description: Proposed swap transaction (from, to, data, value, gas, estimatedGasUse, allowanceTarget, simulationStatus, ...).
+          additionalProperties: true
+        details:
+          type: object
+          properties:
+            swapProvider:
+              type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  details: {}
+    SwapQuoteRequest:
+      type: object
+      required:
+      - buyToken
+      - buyNetworkId
+      - sellNetworkId
+      - sellAmount
+      - userAddress
+      properties:
+        buyToken:
+          type: string
+          description: Address of the token to buy.
+        buyIsNative:
+          type: boolean
+        buyNetworkId:
+          $ref: '#/components/schemas/NetworkId'
+        sellToken:
+          type: string
+        sellIsNative:
+          type: boolean
+        sellNetworkId:
+          $ref: '#/components/schemas/NetworkId'
+        sellAmount:
+          type: string
+          description: Amount to sell in base units (serialized bigint).
+        slippagePercentage:
+          type: string
+        postHook:
+          type: object
+          description: Optional Squid post-hook executed after the swap (cross-chain swap-deposit flows).
+          additionalProperties: true
+        userAddress:
+          type: string
+        enableAppFee:
+          type: boolean

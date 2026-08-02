@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: derived
+source: https://github.com/divvi-xyz/hooks (src/api/index.ts) + openapi/valora-api-openapi.yml
+notes: >-
+  Valora publishes no formal versioning/deprecation policy, SLA, or status
+  page for its API (absence recorded). Lifecycle signals below are derived
+  from the open-source API implementation and repo release practice.
+versioning:
+  scheme: uri-path
+  current: v2 (shortcuts family); unversioned elsewhere
+  details: >-
+    Route-level versioning — /hooks-api/v2/getShortcuts supersedes
+    /hooks-api/getShortcuts. The mobile app itself is released continuously
+    (nightly builds + manually-triggered production releases, see RELEASES.md
+    in valora-xyz/wallet).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  details: >-
+    Deprecations are annotated in source and kept backward compatible for
+    older app versions (legacy `network` parameter still accepted; hooks-api
+    gates features by parsed app version in User-Agent). No RFC 8594
+    Sunset/Deprecation headers observed.
+sla: null
+status_page: null
+deprecated_operations:
+  - openapi/valora-api-openapi.yml#getShortcuts

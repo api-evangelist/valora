@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/valora-api-openapi.yml + https://github.com/divvi-xyz/hooks (src/api/index.ts) + live probes (2026-07-21)
+notes: >-
+  The Valora API is public and requires no authentication: the open-source
+  hooks-api declares no security schemes, enables CORS with origin '*', and
+  all endpoints answered live probes without credentials. Security derives
+  from the flow design — mutating operations (getSwapQuote, triggerShortcut,
+  simulateTransactions) only return unsigned transactions that must be signed
+  client-side by the wallet holder's key, so possession of the private key is
+  the effective authorization boundary. The wallet app itself is
+  self-custodial (keys never leave the device).
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+schemes: []
+client_side_signing:
+  required_for: [getSwapQuote, triggerShortcut, simulateTransactions]
+  details: Unsigned EVM transactions are returned to the client; signing happens in the wallet with the user's key.

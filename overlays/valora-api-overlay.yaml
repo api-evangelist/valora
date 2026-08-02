@@ -1,0 +1,30 @@
+# API Evangelist enhancements for the Valora API (Overlay 1.0.0)
+# generated: '2026-07-21'  method: generated  source: openapi/valora-api-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Valora API
+  version: 1.0.0
+extends: openapi/valora-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist:
+        provider: valora
+        derived: true
+        derived-from: https://github.com/divvi-xyz/hooks
+        notes: >-
+          Spec reconstructed from Valora's open-source hooks repository and
+          live probes; Valora publishes no first-party OpenAPI. The hooks-api
+          routes are implemented as a Google Cloud Function (express app)
+          fronted by api.mainnet.valora.xyz/hooks-api.
+  - target: $.info
+    update:
+      x-agent-notes: >-
+        No authentication is required; responses use a {message: "OK", data: ...}
+        envelope on hooks-api routes. /getNfts paginates with a pageKey cursor.
+        Write-shaped operations (triggerShortcut, getSwapQuote,
+        simulateTransactions) never move funds server-side — they return
+        unsigned transactions the wallet user must sign client-side.
+  - target: $.paths['/hooks-api/getShortcuts'].get
+    update:
+      x-sunset-note: Marked "Deprecated route, will be removed in the future" in source; use /hooks-api/v2/getShortcuts.

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/valora-xyz/wallet/releases.atom
+notes: >-
+  Valora publishes dated, semver-tagged releases of the open-source wallet app
+  on GitHub (nightly builds plus manually-triggered production releases —
+  see RELEASES.md). There is no separate dated changelog for the HTTP API.
+scheme: semver (app releases)
+current_version: 1.126.0
+releases_url: https://github.com/valora-xyz/wallet/releases
+entries:
+  - version: 1.126.0
+    date: '2026-03-27'
+  - version: 1.125.0
+    date: '2026-02-26'
+  - version: 1.124.0
+    date: '2026-02-25'
+  - version: 1.123.0
+    date: '2026-02-16'
+  - version: 1.122.0
+    date: '2026-01-19'
+  - version: 1.121.1
+    date: '2026-01-19'
+  - version: 1.121.0
+    date: '2026-01-07'
+  - version: 1.120.0
+    date: '2025-11-18'

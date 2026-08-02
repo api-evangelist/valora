@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=%40valora
+notes: >-
+  First-party packages published to npm by Valora (GitHub orgs valora-inc /
+  valora-xyz, npm publisher valora-bot). Valora ships developer tooling and
+  the Mobile Stack wallet framework rather than a traditional API client SDK;
+  the hooks development kit (@valora/plugins, superseded by the divvi-xyz/hooks
+  repo) and wallet-stack are the primary developer surfaces.
+packages:
+  - language: javascript
+    registry: npm
+    name: wallet-stack
+    url: https://www.npmjs.com/package/wallet-stack
+    install: npm install wallet-stack
+    official: true
+    description: Mobile Stack — Valora's modular React Native framework for building mobile crypto apps (alpha).
+    repository: https://github.com/valora-xyz/wallet-stack
+  - language: typescript
+    registry: npm
+    name: "@valora/plugins"
+    url: https://www.npmjs.com/package/@valora/plugins
+    install: npm install @valora/plugins
+    official: true
+    description: Valora Hooks development kit — extend Valora with position pricing and shortcut hooks (development continues in divvi-xyz/hooks).
+    repository: https://github.com/divvi-xyz/hooks
+  - language: typescript
+    registry: npm
+    name: "@valora/http-handler"
+    url: https://www.npmjs.com/package/@valora/http-handler
+    install: npm install @valora/http-handler
+    official: true
+    description: Logging and error handling for Google Cloud Function HTTP endpoints (used by Valora's APIs).
+  - language: typescript
+    registry: npm
+    name: "@valora/logging"
+    url: https://www.npmjs.com/package/@valora/logging
+    install: npm install @valora/logging
+    official: true
+    description: Valora's shared logging library.
+  - language: typescript
+    registry: npm
+    name: "@valora/viem-account-hsm-gcp"
+    url: https://www.npmjs.com/package/@valora/viem-account-hsm-gcp
+    install: npm install @valora/viem-account-hsm-gcp
+    official: true
+    description: Viem account implementation backed by a Google Cloud HSM key.
+    repository: https://github.com/valora-xyz/viem-account-hsm-gcp
+  - language: typescript
+    registry: npm
+    name: "@valora/eslint-config-typescript"
+    url: https://www.npmjs.com/package/@valora/eslint-config-typescript
+    install: npm install @valora/eslint-config-typescript
+    official: true
+    description: Valora's shared ESLint TypeScript configuration.
+    repository: https://github.com/valora-xyz/eslint-config-typescript
+  - language: typescript
+    registry: npm
+    name: "@valora/ops"
+    url: https://www.npmjs.com/package/@valora/ops
+    install: npm install @valora/ops
+    official: true
+    description: Valora-specific operations scripts.

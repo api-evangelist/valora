@@ -1,0 +1,65 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/valora-api-openapi.yml (schemas derived from divvi-xyz/hooks src/types)
+notes: >-
+  Entity-relationship view of the Valora API surface, derived from the
+  OpenAPI schemas (which were themselves derived from Valora's open-source
+  hook types). Ids are network-scoped strings of the form
+  "<networkId>:<address>" (e.g. celo-mainnet:0x471e...).
+id_conventions:
+  - entity: TokenInfo
+    id_field: tokenId
+    format: '<networkId>:<address>'
+  - entity: Position
+    id_field: positionId
+    format: '<networkId>:<address>'
+entities:
+  - name: TokenInfo
+    description: Token metadata and USD price, keyed by tokenId.
+  - name: Position
+    description: DeFi position priced by a hook — app-token (fungible, has supply/pricePerShare) or contract-position (has balanceUsd).
+  - name: PositionToken
+    description: Token held inside a position (base token or nested app token); may carry a claimable category.
+  - name: Shortcut
+    description: Action definition (claim, deposit, withdraw, swap-deposit) exposed by a hook app.
+  - name: Transaction
+    description: Unsigned EVM transaction returned for client-side signing.
+  - name: SimulatedTransaction
+    description: Gas/simulation result for a proposed transaction.
+  - name: Nft
+    description: NFT held by an address (contractAddress + tokenId).
+  - name: App (hook app)
+    description: Hook application id/name (e.g. ubeswap, aave, gooddollar) that produces positions and shortcuts.
+relationships:
+  - from: Position
+    to: App (hook app)
+    kind: belongs_to
+    via: appId
+  - from: Position
+    to: PositionToken
+    kind: has_many
+    via: tokens
+  - from: Position
+    to: Shortcut
+    kind: has_many
+    via: availableShortcutIds
+  - from: Shortcut
+    to: App (hook app)
+    kind: belongs_to
+    via: appId
+  - from: PositionToken
+    to: TokenInfo
+    kind: belongs_to
+    via: tokenId
+  - from: Shortcut
+    to: Transaction
+    kind: has_many
+    via: triggerShortcut response data.transactions
+  - from: Transaction
+    to: SimulatedTransaction
+    kind: has_one
+    via: simulateTransactions response (positional)
+  - from: Nft
+    to: TokenInfo
+    kind: none
+    via: independent surface (contractAddress/tokenId are NFT-scoped)

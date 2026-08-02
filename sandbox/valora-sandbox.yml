@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/divvi-xyz/hooks
+notes: >-
+  Valora publishes a full staging/testnet API environment and a live-preview
+  developer mode for hooks, documented in the open-source hooks repository
+  (divvi-xyz/hooks, formerly valora-inc/hooks). No secret test credentials are
+  required; the staging environment targets the Celo Alfajores testnet.
+environments:
+  - name: production
+    api_host: https://api.mainnet.valora.xyz
+    networks: [celo-mainnet, ethereum-mainnet, arbitrum-one, op-mainnet, base-mainnet, polygon-pos-mainnet]
+    google_cloud_project: celo-mobile-mainnet
+    source: https://github.com/divvi-xyz/hooks/blob/main/src/api/production.yaml
+  - name: staging
+    api_host: https://api.alfajores.valora.xyz
+    networks: [celo-alfajores, ethereum-sepolia, arbitrum-sepolia, op-sepolia, base-sepolia, polygon-pos-amoy]
+    google_cloud_project: celo-mobile-alfajores
+    source: https://github.com/divvi-xyz/hooks/blob/main/src/api/staging.yaml
+    notes: >-
+      Testnet environment — Celo Alfajores and other test networks; same
+      endpoint surface as production (getTokensInfoWithPrices, getSwapQuote,
+      simulateTransactions, hooks-api). PROBE 2026-07-21: the
+      api.alfajores.valora.xyz hostname did not resolve (status 000) — the
+      staging host may have been retired; it remains the documented staging
+      URL in the open-source config.
+test_networks:
+  - celo-alfajores
+  - ethereum-sepolia
+  - arbitrum-sepolia
+  - op-sepolia
+  - base-sepolia
+  - polygon-pos-amoy
+developer_tooling:
+  - name: Hooks live preview
+    description: >-
+      Hooks in development are tested against the real app: run `yarn start`
+      in the hooks repo, then scan the QR code from the terminal with the
+      Valora app's QR scanner to put the app in hook preview mode. A banner
+      indicates fetch status (grey idle/loading, green success, red error).
+    docs: https://github.com/divvi-xyz/hooks/blob/main/docs/live-preview.md
+  - name: Example hook application
+    description: Reference hook implementations used as a starting point for new hooks.
+    docs: https://github.com/divvi-xyz/hooks/tree/main/src/apps/example

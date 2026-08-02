@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/valora-api-openapi.yml + https://github.com/divvi-xyz/hooks + live probes (2026-07-21)
+notes: >-
+  Standards posture derived from the open-source API implementation and live
+  behavior. Valora publishes no compliance/certification program for its API,
+  so no Compliance pointer is emitted.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: No OAuth2 — endpoints are public and unauthenticated.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on valora.xyz; no OIDC surface.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are JSON message envelopes, not application/problem+json (observed live).
+  - id: json-api
+    conforms: false
+    evidence: Responses use a bespoke message/data envelope, not JSON:API.
+  - id: pagination-cursor
+    conforms: true
+    evidence: /getNfts paginates with a pageKey cursor (divvi-xyz/hooks src/apps/hedgey/nfts.ts).
+  - id: idempotency-key
+    conforms: false
+    evidence: No idempotency-key mechanism in the open-source API implementation.
+  - id: cors
+    conforms: true
+    evidence: "hooks-api enables CORS with origin: '*' (src/api/index.ts)."
+  - id: rfc8594-sunset
+    conforms: false
+    evidence: Deprecated route (/hooks-api/getShortcuts) carries no Sunset/Deprecation headers.
+  - id: walletconnect
+    conforms: true
+    evidence: The Valora wallet integrates dapps via WalletConnect (valora-xyz/wallet docs/connecting-dapps.md).
+  - id: eip-155-networks
+    conforms: true
+    evidence: Multi-network EVM support via network-scoped ids (celo, ethereum, arbitrum, optimism, polygon, base).

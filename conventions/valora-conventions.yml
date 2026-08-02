@@ -1,0 +1,54 @@
+generated: '2026-07-21'
+method: derived
+source: https://github.com/divvi-xyz/hooks (src/api/index.ts) + openapi/valora-api-openapi.yml + live probes
+notes: >-
+  Cross-cutting request/response semantics of the Valora API, derived from the
+  open-source hooks-api implementation and observed live behavior. Valora
+  publishes no formal API conventions document.
+authentication:
+  style: none
+  details: >-
+    Endpoints are public and unauthenticated; hooks-api sets CORS
+    Access-Control-Allow-Origin: * . Mutating flows never custody funds —
+    they return unsigned transactions the wallet signs client-side.
+idempotency:
+  supported: false
+  details: No idempotency-key mechanism is documented or present in the open-source API implementation.
+pagination:
+  style: cursor
+  params:
+    - name: pageKey
+      in: query
+  response_fields:
+    - pageKey
+  details: /getNfts paginates with a pageKey cursor; other endpoints return complete collections.
+request_conventions:
+  - Query arrays (networkIds, appIds, supportedPools) are repeatable parameters; singleton arrays may serialize as single values.
+  - networkIds values are network-scoped ids (celo-mainnet, arbitrum-one, ...); the legacy `network` parameter (celo | celoAlfajores) is still accepted on hooks routes.
+  - Addresses are 0x-prefixed 40-hex-char strings, lowercased server-side.
+  - The wallet sends a User-Agent of the form Valora/<version>; hooks-api parses it to gate feature behavior by app version.
+response_envelope:
+  shape: '{ message: "OK", data: ... }'
+  details: >-
+    hooks-api routes wrap results in a message/data envelope;
+    simulateTransactions uses a status/simulatedTransactions envelope;
+    getTokensInfoWithPrices returns a bare tokenId-keyed map.
+serialization:
+  - Bigint values (value, gas, estimatedGasUse, sellAmount) are serialized as decimal strings.
+  - Token and position ids are network-scoped, e.g. celo-mainnet:0x471ece3750da237f93b8e339c536989b8978a438.
+error_envelope:
+  shape: JSON error body with a message field (zod validation errors on 400)
+  see: errors/valora-problem-types.yml
+versioning:
+  scheme: uri-path
+  details: Breaking route revisions get a versioned path (/hooks-api/v2/getShortcuts); the unversioned /hooks-api/getShortcuts route is deprecated in source. No dated global API version.
+  see: lifecycle/valora-lifecycle.yml
+rate_limiting:
+  signaling: none observed
+  details: No rate-limit headers or documented limits were found.
+internationalization:
+  details: hooks-api runs i18next middleware — display strings in positions/shortcuts responses are localized from the request locale.
+cross_links:
+  errors: errors/valora-problem-types.yml
+  lifecycle: lifecycle/valora-lifecycle.yml
+  authentication: authentication/valora-authentication.yml

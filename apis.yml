@@ -1,8 +1,28 @@
 aid: valora
 name: Valora
-description: Valora is a company surfaced as a portfolio company of a16z, polychain and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Valora is an open-source, self-custodial mobile crypto wallet focused on
+  making digital assets and peer-to-peer payments simple and accessible from a
+  phone. Born in the Celo ecosystem and now multichain (Celo, Ethereum,
+  Arbitrum, Optimism, Base, Polygon), it pairs the wallet app with a public
+  API for token prices, swap quotes, NFTs, and transaction simulation, plus
+  the Divvi Hooks platform that lets developers extend the app with
+  position-pricing and shortcut hooks. Valora Inc is backed by a16z and
+  Polychain.
 url: https://raw.githubusercontent.com/api-evangelist/valora/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/85907816?v=4
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -10,17 +30,135 @@ x-backed-by:
 - polychain
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Cryptocurrency
+- Wallet
+- Payments
+- DeFi
+- Blockchain
+- Celo
+- Mobile
+apis:
+- aid: valora:valora-hooks-api
+  name: Valora hooks API
+  description: Divvi Hooks API (positions and shortcuts), served under /hooks-api
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - hooks
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-hooks-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
+- aid: valora:valora-nfts-api
+  name: Valora nfts API
+  description: NFTs held by an address
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - nfts
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-nfts-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
+- aid: valora:valora-swaps-api
+  name: Valora swaps API
+  description: Swap quotes
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - swaps
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-swaps-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
+- aid: valora:valora-tokens-api
+  name: Valora tokens API
+  description: Token metadata and prices
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
+- aid: valora:valora-transactions-api
+  name: Valora transactions API
+  description: Transaction simulation
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/valora-domain-security.yml
 - type: Website
   url: https://valora.xyz
+- type: Blog
+  url: https://valora.xyz/blog
+- type: Support
+  url: https://support.valoraapp.com/hc/en-us
+- type: PrivacyPolicy
+  url: https://valora.xyz/privacy
+- type: TermsOfService
+  url: https://valora.xyz/terms
+- type: GitHubOrganization
+  url: https://github.com/valora-xyz
+- type: Documentation
+  url: https://github.com/valora-xyz/wallet/tree/main/docs
+- type: Packages
+  url: packages/valora-packages.yml
+- type: SDKs
+  url: packages/valora-packages.yml
+- type: MCPServer
+  url: mcp/valora-mcp.yml
+- type: LLMsTxt
+  url: llms/valora-llms.txt
+- type: Overlay
+  url: overlays/valora-api-overlay.yaml
+- type: Conformance
+  url: conformance/valora-conformance.yml
+- type: ErrorCatalog
+  url: errors/valora-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/valora-lifecycle.yml
+- type: Sandbox
+  url: sandbox/valora-sandbox.yml
+- type: Conventions
+  url: conventions/valora-conventions.yml
+- type: ChangeLog
+  url: changelog/valora-changelog.yml
+- type: DataModel
+  url: data-model/valora-data-model.yml
+- type: Authentication
+  url: authentication/valora-authentication.yml
+- type: AgentSkill
+  name: Price a wallet's DeFi positions with Valora
+  url: skills/valora-price-defi-positions.md
+- type: AgentSkill
+  name: Discover and trigger Valora shortcuts
+  url: skills/valora-discover-and-trigger-shortcuts.md

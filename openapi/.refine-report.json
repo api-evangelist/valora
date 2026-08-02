@@ -1,0 +1,22 @@
+{
+  "provider": "valora",
+  "sources": [
+    "valora-hooks-api-openapi.yml",
+    "valora-nfts-api-openapi.yml",
+    "valora-swaps-api-openapi.yml",
+    "valora-tokens-api-openapi.yml",
+    "valora-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "valora-hooks-api-openapi.yml",
+    "valora-nfts-api-openapi.yml",
+    "valora-swaps-api-openapi.yml",
+    "valora-tokens-api-openapi.yml",
+    "valora-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

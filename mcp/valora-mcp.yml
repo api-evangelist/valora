@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/valora-api-openapi.yml
+notes: >-
+  No official hosted/remote MCP server was found for Valora (no MCP mention in
+  the valora-xyz/divvi-xyz GitHub orgs, npm @valora scope, or docs). This is a
+  candidate tool list derived from the Valora API operations; the underlying
+  endpoints are public and unauthenticated, and mutating flows only return
+  unsigned transactions for client-side signing.
+server:
+  name: valora
+  transport: http
+tools:
+  - name: get_tokens_info_with_prices
+    description: Get all tokens Valora supports with metadata and USD prices
+    source_operation: openapi/valora-api-openapi.yml#getTokensInfoWithPrices
+  - name: get_swap_quote
+    description: Get a swap quote (unsigned swap transaction) for a token pair
+    source_operation: openapi/valora-api-openapi.yml#getSwapQuote
+  - name: get_nfts
+    description: List NFTs held by a wallet address (pageKey cursor pagination)
+    source_operation: openapi/valora-api-openapi.yml#getNfts
+  - name: simulate_transactions
+    description: Simulate a batch of transactions and return gas estimates
+    source_operation: openapi/valora-api-openapi.yml#simulateTransactions
+  - name: get_positions
+    description: Get DeFi positions (app tokens and contract positions) for an address
+    source_operation: openapi/valora-api-openapi.yml#getPositions
+  - name: get_earn_positions
+    description: Get positions available for the Earn feature
+    source_operation: openapi/valora-api-openapi.yml#getEarnPositions
+  - name: get_shortcuts
+    description: List shortcut actions (claim, deposit, withdraw, swap-deposit) by network
+    source_operation: openapi/valora-api-openapi.yml#getShortcutsV2
+  - name: trigger_shortcut
+    description: Trigger a shortcut and get back the unsigned transaction(s) to sign
+    source_operation: openapi/valora-api-openapi.yml#triggerShortcut

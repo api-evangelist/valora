@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/valora-api-openapi.yml + live probes of https://api.mainnet.valora.xyz (2026-07-21) + https://github.com/divvi-xyz/hooks
+format: json-message-envelope
+notes: >-
+  Valora does not publish an error reference and does not use RFC 9457
+  application/problem+json. Errors are JSON bodies with a `message` field;
+  validation failures (zod) add a `details` tree (hooks-api, getSwapQuote) or
+  an `errors` map (getNfts). Envelope shapes below were observed live.
+envelope:
+  field: message
+  variants:
+    - '{ "message": "Invalid request", "details": { <zod error tree> } }'
+    - '{ "message": "Invalid request", "errors": { "<param>": ["<issue>"] } }'
+problems:
+  - status: 400
+    title: Invalid request (missing/invalid parameters)
+    detail: Zod validation failed for query or body parameters.
+    example: '{"message":"Invalid request","details":{"query":{"networkIds":{"_errors":["Required"]}}}}'
+    source_operation: openapi/valora-api-openapi.yml#getPositions
+    observed: probe 2026-07-21
+  - status: 400
+    title: Invalid request (missing address)
+    example: '{"message":"Invalid request","errors":{"address":["Invalid input: expected string, received undefined"]}}'
+    source_operation: openapi/valora-api-openapi.yml#getNfts
+    observed: probe 2026-07-21
+  - status: 400
+    title: Unknown shortcut
+    detail: "No shortcut found with id '<shortcutId>' for app '<appId>' — response lists available shortcut ids."
+    source_operation: openapi/valora-api-openapi.yml#triggerShortcut
+    source: https://github.com/divvi-xyz/hooks/blob/main/src/api/index.ts
+  - status: 400
+    title: Unsupported simulate request
+    detail: Valid but unsupported request (e.g. unsupported networkId) on /simulateTransactions.
+    source_operation: openapi/valora-api-openapi.yml#simulateTransactions
+    source: https://github.com/divvi-xyz/hooks/blob/main/src/runtime/simulateTransactions.ts
+  - status: 404
+    title: Route not found
+    detail: Unknown paths return 404.
+    observed: probe 2026-07-21

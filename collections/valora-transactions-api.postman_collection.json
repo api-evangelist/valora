@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "302a74db-cd46-40e5-829f-8715a8da7c16",
+      "name": "transactions",
+      "description": {
+        "content": "Transaction simulation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e30364c-7bc3-49c0-a0b0-a35328eebabf",
+          "name": "Simulate transactions",
+          "request": {
+            "name": "Simulate transactions",
+            "description": {
+              "content": "Simulates a batch of transactions on the given network and returns per-transaction gas estimates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "simulateTransactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactions\": [\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    }\n  ],\n  \"networkId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5d1f28a-06da-45c3-8dd3-bda1e27ce521",
+              "name": "Simulation results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "simulateTransactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    }\n  ],\n  \"networkId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"simulatedTransactions\": [\n    {\n      \"status\": \"failure\",\n      \"blockNumber\": \"string\",\n      \"gasNeeded\": 466.43735033230496,\n      \"gasUsed\": 6348.660345483428,\n      \"gasPrice\": \"string\"\n    },\n    {\n      \"status\": \"success\",\n      \"blockNumber\": \"string\",\n      \"gasNeeded\": 5011.206733690453,\n      \"gasUsed\": 2081.3639822486452,\n      \"gasPrice\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e919046f-3a75-49d9-9b33-49d07b11387b",
+              "name": "Valid but unsupported request (e.g. unsupported networkId).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "simulateTransactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactions\": [\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    },\n    {\n      \"networkId\": \"<string>\",\n      \"from\": \"<string>\",\n      \"to\": \"<string>\",\n      \"data\": \"<string>\",\n      \"value\": \"<string>\",\n      \"gas\": \"<string>\",\n      \"estimatedGasUse\": \"<string>\"\n    }\n  ],\n  \"networkId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mainnet.valora.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a9d23fbc-739e-4725-ad15-74f2e0d7e120",
+    "name": "Valora hooks transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.",
+      "type": "text/plain"
+    }
+  }
+}

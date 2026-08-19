@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "1fcb726d-e54c-456f-946b-4c165a64e9bf",
+      "name": "swaps",
+      "description": {
+        "content": "Swap quotes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9fead8e-c6b2-4683-a97b-7fc7d8e77439",
+          "name": "Get a swap quote",
+          "request": {
+            "name": "Get a swap quote",
+            "description": {
+              "content": "Returns an unvalidated swap transaction for a proposed token swap (used by the wallet and by swap-deposit shortcuts).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getSwapQuote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buyToken\": \"<string>\",\n  \"buyNetworkId\": \"<string>\",\n  \"sellNetworkId\": \"<string>\",\n  \"sellAmount\": \"<string>\",\n  \"userAddress\": \"<string>\",\n  \"buyIsNative\": \"<boolean>\",\n  \"sellToken\": \"<string>\",\n  \"sellIsNative\": \"<boolean>\",\n  \"slippagePercentage\": \"<string>\",\n  \"postHook\": {\n    \"key_0\": 5832,\n    \"key_1\": \"string\"\n  },\n  \"enableAppFee\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0103d30f-d981-408b-b750-452dd84df7ac",
+              "name": "Swap quote.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSwapQuote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyToken\": \"<string>\",\n  \"buyNetworkId\": \"<string>\",\n  \"sellNetworkId\": \"<string>\",\n  \"sellAmount\": \"<string>\",\n  \"userAddress\": \"<string>\",\n  \"buyIsNative\": \"<boolean>\",\n  \"sellToken\": \"<string>\",\n  \"sellIsNative\": \"<boolean>\",\n  \"slippagePercentage\": \"<string>\",\n  \"postHook\": {\n    \"key_0\": 5175\n  },\n  \"enableAppFee\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"unvalidatedSwapTransaction\": {\n    \"key_0\": false,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": 74.68170896627879,\n    \"key_4\": 1681\n  },\n  \"details\": {\n    \"swapProvider\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"provider\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"details\": \"\"\n      }\n    },\n    {\n      \"provider\": \"string\",\n      \"error\": {\n        \"message\": \"string\",\n        \"details\": \"\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19fc9460-711f-4b8a-ac47-0797b1d24a0d",
+              "name": "Invalid or unsupported swap request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSwapQuote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"buyToken\": \"<string>\",\n  \"buyNetworkId\": \"<string>\",\n  \"sellNetworkId\": \"<string>\",\n  \"sellAmount\": \"<string>\",\n  \"userAddress\": \"<string>\",\n  \"buyIsNative\": \"<boolean>\",\n  \"sellToken\": \"<string>\",\n  \"sellIsNative\": \"<boolean>\",\n  \"slippagePercentage\": \"<string>\",\n  \"postHook\": {\n    \"key_0\": 5175\n  },\n  \"enableAppFee\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mainnet.valora.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3c709c83-29fb-4cb9-9968-52d64b2a3817",
+    "name": "Valora hooks swaps API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.",
+      "type": "text/plain"
+    }
+  }
+}

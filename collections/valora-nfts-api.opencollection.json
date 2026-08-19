@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Valora hooks nfts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "nfts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List NFTs for an address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/getNfts",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "Cursor returned by the previous page."
+              }
+            ]
+          },
+          "docs": "Returns NFTs held by a wallet address, paginated with a pageKey cursor."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,162 @@
+{
+  "item": [
+    {
+      "id": "569432c0-390f-483d-bbec-4a6b2c61bbbc",
+      "name": "nfts",
+      "description": {
+        "content": "NFTs held by an address",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a41f53f0-4a32-4cfb-be8c-6e4ec3b12878",
+          "name": "List NFTs for an address",
+          "request": {
+            "name": "List NFTs for an address",
+            "description": {
+              "content": "Returns NFTs held by a wallet address, paginated with a pageKey cursor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getNfts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "Cursor returned by the previous page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb6b6fd3-1fa8-4319-aad6-8b64648b8a11",
+              "name": "Page of NFTs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getNfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": [\n    {\n      \"contractAddress\": \"string\",\n      \"tokenId\": \"string\",\n      \"metadata\": {\n        \"image\": \"string\"\n      },\n      \"media\": [\n        {\n          \"raw\": \"string\",\n          \"gateway\": \"string\"\n        },\n        {\n          \"raw\": \"string\",\n          \"gateway\": \"string\"\n        }\n      ]\n    },\n    {\n      \"contractAddress\": \"string\",\n      \"tokenId\": \"string\",\n      \"metadata\": {\n        \"image\": \"string\",\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"media\": [\n        {\n          \"raw\": \"string\",\n          \"gateway\": \"string\"\n        },\n        {\n          \"raw\": \"string\",\n          \"gateway\": \"string\"\n        }\n      ],\n      \"key_0\": 5327\n    }\n  ],\n  \"pageKey\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62094877-bbf5-48d6-9e70-0863255209a6",
+              "name": "Missing or invalid address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getNfts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mainnet.valora.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bac87565-00f1-4801-8c5d-9064ec40e060",
+    "name": "Valora hooks nfts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.",
+      "type": "text/plain"
+    }
+  }
+}

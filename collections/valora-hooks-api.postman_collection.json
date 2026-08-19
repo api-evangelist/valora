@@ -1,0 +1,766 @@
+{
+  "item": [
+    {
+      "id": "0195923c-7416-446b-9cc6-40672f687584",
+      "name": "hooks",
+      "description": {
+        "content": "Divvi Hooks API (positions and shortcuts), served under /hooks-api",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6c8cf73-ae11-4785-a53c-be98798ea743",
+          "name": "Get DeFi positions",
+          "request": {
+            "name": "Get DeFi positions",
+            "description": {
+              "content": "Returns app-token and contract positions (DeFi holdings) detected by position-pricing hooks, optionally filtered to a wallet address and app ids.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hooks-api",
+                "getPositions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appIds",
+                  "value": "<string>",
+                  "description": "Filter to specific hook app ids (repeatable)."
+                },
+                {
+                  "disabled": false,
+                  "key": "appIds",
+                  "value": "<string>",
+                  "description": "Filter to specific hook app ids (repeatable)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93d8434d-cc2e-4fa4-87e7-8e814b35106d",
+              "name": "Positions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "getPositions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\",\n  \"data\": [\n    {\n      \"positionId\": \"string\",\n      \"address\": \"string\",\n      \"networkId\": \"<string>\",\n      \"appId\": \"string\",\n      \"type\": \"app-token\",\n      \"appName\": \"string\",\n      \"label\": \"string\",\n      \"displayProps\": {\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"imageUrl\": \"string\",\n        \"manageUrl\": \"string\"\n      },\n      \"dataProps\": {\n        \"key_0\": 3751.9121894503846\n      },\n      \"tokens\": [\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 3772,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"base-token\",\n          \"category\": \"claimable\"\n        },\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 7101,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"base-token\",\n          \"category\": \"claimable\"\n        }\n      ],\n      \"availableShortcutIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"shortcutTriggerArgs\": {\n        \"key_0\": \"string\"\n      },\n      \"balanceUsd\": \"string\",\n      \"supply\": \"string\",\n      \"pricePerShare\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"positionId\": \"string\",\n      \"address\": \"string\",\n      \"networkId\": \"<string>\",\n      \"appId\": \"string\",\n      \"type\": \"app-token\",\n      \"appName\": \"string\",\n      \"label\": \"string\",\n      \"displayProps\": {\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"imageUrl\": \"string\",\n        \"manageUrl\": \"string\"\n      },\n      \"dataProps\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": \"string\",\n        \"key_3\": 3051\n      },\n      \"tokens\": [\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 6283,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"app-token\",\n          \"category\": \"claimable\"\n        },\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 1348,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"base-token\",\n          \"category\": \"claimable\"\n        }\n      ],\n      \"availableShortcutIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"shortcutTriggerArgs\": {\n        \"key_0\": true\n      },\n      \"balanceUsd\": \"string\",\n      \"supply\": \"string\",\n      \"pricePerShare\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "673b6c2d-5e69-41ce-a4d2-797311da2ad7",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "getPositions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67a51962-524a-436a-912e-12a1c27633ed",
+          "name": "Get positions for the Earn feature",
+          "request": {
+            "name": "Get positions for the Earn feature",
+            "description": {},
+            "url": {
+              "path": [
+                "hooks-api",
+                "getEarnPositions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedPools",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedPools",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedAppIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedAppIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "92cb2a81-90ec-4e23-b2c7-21f127730af7",
+              "name": "Earn positions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "getEarnPositions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedPools",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedPools",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedAppIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedAppIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\",\n  \"data\": [\n    {\n      \"positionId\": \"string\",\n      \"address\": \"string\",\n      \"networkId\": \"<string>\",\n      \"appId\": \"string\",\n      \"type\": \"contract-position\",\n      \"appName\": \"string\",\n      \"label\": \"string\",\n      \"displayProps\": {\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"imageUrl\": \"string\",\n        \"manageUrl\": \"string\"\n      },\n      \"dataProps\": {\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      \"tokens\": [\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 8964,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"app-token\",\n          \"category\": \"claimable\"\n        },\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 9054,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"app-token\",\n          \"category\": \"claimable\"\n        }\n      ],\n      \"availableShortcutIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"shortcutTriggerArgs\": {\n        \"key_0\": 3183,\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"balanceUsd\": \"string\",\n      \"supply\": \"string\",\n      \"pricePerShare\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"positionId\": \"string\",\n      \"address\": \"string\",\n      \"networkId\": \"<string>\",\n      \"appId\": \"string\",\n      \"type\": \"contract-position\",\n      \"appName\": \"string\",\n      \"label\": \"string\",\n      \"displayProps\": {\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"imageUrl\": \"string\",\n        \"manageUrl\": \"string\"\n      },\n      \"dataProps\": {\n        \"key_0\": false\n      },\n      \"tokens\": [\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 638,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"base-token\",\n          \"category\": \"claimable\"\n        },\n        {\n          \"tokenId\": \"string\",\n          \"address\": \"string\",\n          \"networkId\": \"<string>\",\n          \"symbol\": \"string\",\n          \"decimals\": 9701,\n          \"priceUsd\": \"string\",\n          \"balance\": \"string\",\n          \"type\": \"app-token\",\n          \"category\": \"claimable\",\n          \"key_0\": \"string\",\n          \"key_1\": 1146\n        }\n      ],\n      \"availableShortcutIds\": [\n        \"string\",\n        \"string\"\n      ],\n      \"shortcutTriggerArgs\": {\n        \"key_0\": true\n      },\n      \"balanceUsd\": \"string\",\n      \"supply\": \"string\",\n      \"pricePerShare\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec308ca6-e7d9-4a01-8bfb-3736d501cea2",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "getEarnPositions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedPools",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedPools",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedAppIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "supportedAppIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de6c0caa-7b75-46d8-95f4-757fa4425925",
+          "name": "List shortcuts (deprecated)",
+          "request": {
+            "name": "List shortcuts (deprecated)",
+            "description": {
+              "content": "Deprecated route (celo-mainnet only) — use /hooks-api/v2/getShortcuts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hooks-api",
+                "getShortcuts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ad98964-bec8-476a-9ab8-fee6ac4f8c8e",
+              "name": "Shortcuts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "getShortcuts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"networkIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"category\": \"swap-deposit\",\n      \"key_0\": 8346.492801882052,\n      \"key_1\": 5546.722833123931\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"networkIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"category\": \"claim\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a02c139a-1097-4a74-8eb3-b087a7a5ac3f",
+          "name": "List shortcuts",
+          "request": {
+            "name": "List shortcuts",
+            "description": {
+              "content": "Returns shortcut definitions (claim, deposit, withdraw, swap-deposit actions) available on the requested networks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hooks-api",
+                "v2",
+                "getShortcuts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "networkIds",
+                  "value": "<string>",
+                  "description": "(Required) One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appIds",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appIds",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4328a7ce-7a9b-40b2-b601-425829f172fc",
+              "name": "Shortcuts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "v2",
+                    "getShortcuts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"networkIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"category\": \"swap-deposit\",\n      \"key_0\": true\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"networkIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"category\": \"deposit\",\n      \"key_0\": 5512.889750037093,\n      \"key_1\": 2489\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9596656-1293-485e-abe4-feeb5b3ae4a8",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "v2",
+                    "getShortcuts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "networkIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appIds",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0870c80f-7c75-473f-90d6-ca26a0353c37",
+          "name": "Trigger a shortcut",
+          "request": {
+            "name": "Trigger a shortcut",
+            "description": {
+              "content": "Executes a shortcut's trigger and returns the transaction(s) the user must sign. Additional body fields are required per-shortcut (triggerInputShape), e.g. tokens for deposit/withdraw shortcuts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hooks-api",
+                "triggerShortcut"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\",\n  \"appId\": \"<string>\",\n  \"shortcutId\": \"<string>\",\n  \"networkId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7f5c4bc-5e67-45b9-9a8b-0e91feac072e",
+              "name": "Transactions to sign plus shortcut-specific output.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "triggerShortcut"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\",\n  \"appId\": \"<string>\",\n  \"shortcutId\": \"<string>\",\n  \"networkId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"OK\",\n  \"data\": {\n    \"transactions\": [\n      {\n        \"networkId\": \"<string>\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"data\": \"string\",\n        \"value\": \"string\",\n        \"gas\": \"string\",\n        \"estimatedGasUse\": \"string\"\n      },\n      {\n        \"networkId\": \"<string>\",\n        \"from\": \"string\",\n        \"to\": \"string\",\n        \"data\": \"string\",\n        \"value\": \"string\",\n        \"gas\": \"string\",\n        \"estimatedGasUse\": \"string\"\n      }\n    ],\n    \"key_0\": 1022\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f95be554-14b5-4388-b3e8-bd693739535c",
+              "name": "Unknown shortcut id or invalid trigger input.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hooks-api",
+                    "triggerShortcut"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"<string>\",\n  \"appId\": \"<string>\",\n  \"shortcutId\": \"<string>\",\n  \"networkId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mainnet.valora.xyz",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "73cea190-008a-4148-b575-a70d9e8e542e",
+    "name": "Valora hooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.",
+      "type": "text/plain"
+    }
+  }
+}

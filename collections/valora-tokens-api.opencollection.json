@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Valora hooks tokens API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get supported tokens with metadata and prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/getTokensInfoWithPrices"
+          },
+          "docs": "Returns a map of tokenId to token info for all tokens Valora supports."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

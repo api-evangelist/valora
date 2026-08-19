@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Valora hooks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "hooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DeFi positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/hooks-api/getPositions",
+            "params": [
+              {
+                "name": "networkIds",
+                "value": "",
+                "type": "query",
+                "description": "One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appIds",
+                "value": "",
+                "type": "query",
+                "description": "Filter to specific hook app ids (repeatable)."
+              }
+            ]
+          },
+          "docs": "Returns app-token and contract positions (DeFi holdings) detected by position-pricing hooks, optionally filtered to a wallet address and app ids."
+        },
+        {
+          "info": {
+            "name": "Get positions for the Earn feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/hooks-api/getEarnPositions",
+            "params": [
+              {
+                "name": "networkIds",
+                "value": "",
+                "type": "query",
+                "description": "One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+              },
+              {
+                "name": "supportedPools",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "supportedAppIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get positions for the Earn feature"
+        },
+        {
+          "info": {
+            "name": "List shortcuts (deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/hooks-api/getShortcuts"
+          },
+          "docs": "Deprecated route (celo-mainnet only) — use /hooks-api/v2/getShortcuts."
+        },
+        {
+          "info": {
+            "name": "List shortcuts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.mainnet.valora.xyz/hooks-api/v2/getShortcuts",
+            "params": [
+              {
+                "name": "networkIds",
+                "value": "",
+                "type": "query",
+                "description": "One or more network ids (repeatable). The legacy `network` parameter (celo | celoAlfajores) is also accepted."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns shortcut definitions (claim, deposit, withdraw, swap-deposit actions) available on the requested networks."
+        },
+        {
+          "info": {
+            "name": "Trigger a shortcut",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mainnet.valora.xyz/hooks-api/triggerShortcut",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a shortcut's trigger and returns the transaction(s) the user must sign. Additional body fields are required per-shortcut (triggerInputShape), e.g. tokens for deposit/withdraw shortcuts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

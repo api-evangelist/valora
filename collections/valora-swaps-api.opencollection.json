@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Valora hooks swaps API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "swaps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a swap quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mainnet.valora.xyz/getSwapQuote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns an unvalidated swap transaction for a proposed token swap (used by the wallet and by swap-deposit shortcuts)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

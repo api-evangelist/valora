@@ -41,6 +41,15 @@ modified: '2026-07-21'
 tags:
 - Company
 - Cryptocurrency
+- Wallets
+- Payments
+- DeFi
+- Blockchain
+- Celo
+- Mobile
+tags_raw:
+- Company
+- Cryptocurrency
 - Wallet
 - Payments
 - DeFi
@@ -54,6 +63,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - Hooks
+  tags_raw:
   - hooks
   properties:
   - type: OpenAPI
@@ -66,6 +77,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - NFT
+  tags_raw:
   - nfts
   properties:
   - type: OpenAPI
@@ -78,6 +91,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - Swaps
+  tags_raw:
   - swaps
   properties:
   - type: OpenAPI
@@ -90,6 +105,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - Tokens
+  tags_raw:
   - tokens
   properties:
   - type: OpenAPI
@@ -102,6 +119,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - Transaction
+  tags_raw:
   - transactions
   properties:
   - type: OpenAPI

@@ -75,7 +75,7 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
-  - hooks
+  - Hooks
   tags_raw:
   - hooks
   properties:
@@ -103,7 +103,7 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
-  - swaps
+  - Swaps
   tags_raw:
   - swaps
   properties:

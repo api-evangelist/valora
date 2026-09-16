@@ -83,20 +83,6 @@ apis:
     url: openapi/valora-hooks-api-openapi.yml
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
-- aid: valora:valora-nfts-api
-  name: Valora nfts API
-  description: NFTs held by an address
-  humanURL: https://github.com/divvi-xyz/hooks
-  baseURL: https://api.mainnet.valora.xyz
-  tags:
-  - NFT
-  tags_raw:
-  - nfts
-  properties:
-  - type: OpenAPI
-    url: openapi/valora-nfts-api-openapi.yml
-  - type: Documentation
-    url: https://github.com/divvi-xyz/hooks/tree/main/docs
 - aid: valora:valora-swaps-api
   name: Valora swaps API
   description: Swap quotes
@@ -137,6 +123,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/valora-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/divvi-xyz/hooks/tree/main/docs
+- aid: valora:valora-nf-ts-api
+  name: Valora NF Ts API
+  description: NFTs held by an address
+  humanURL: https://github.com/divvi-xyz/hooks
+  baseURL: https://api.mainnet.valora.xyz
+  tags:
+  - NF Ts
+  properties:
+  - type: OpenAPI
+    url: openapi/valora-nf-ts-api-openapi.yml
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
 maintainers:

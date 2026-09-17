@@ -125,16 +125,16 @@ apis:
     url: openapi/valora-transactions-api-openapi.yml
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
-- aid: valora:valora-nf-ts-api
-  name: Valora NF Ts API
+- aid: valora:valora-nfts-api
+  name: Valora Nfts API
   description: NFTs held by an address
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
-  - NF Ts
+  - nfts
   properties:
   - type: OpenAPI
-    url: openapi/valora-nf-ts-api-openapi.yml
+    url: openapi/valora-nfts-api-openapi.yml
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
 maintainers:

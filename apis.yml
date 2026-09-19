@@ -89,7 +89,7 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
-  - Swaps
+  - Swap
   tags_raw:
   - swaps
   properties:
@@ -131,6 +131,8 @@ apis:
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
   tags:
+  - NFT
+  tags_raw:
   - nfts
   properties:
   - type: OpenAPI

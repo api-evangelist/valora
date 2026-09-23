@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Valora hooks API
-  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes. This specification is DERIVED by API Evangelist from Valora's open-source code (the divvi-xyz/hooks repository, formerly valora-inc/hooks, which implements the hooks-api Google Cloud Function and consumes the other endpoints) plus live probes of the production host. Valora does not publish an OpenAPI; treat this as a faithful reconstruction, not a provider contract.
+  title: Valora Hooks API
+  description: Public HTTP API behind the Valora mobile wallet, including the open-source Divvi Hooks API (positions, shortcuts) and the token, swap-quote, NFT, and transaction-simulation endpoints the wallet consumes.
   version: 1.0.0
   contact:
     url: https://github.com/divvi-xyz/hooks
@@ -22,14 +22,14 @@ servers:
 - url: https://api.alfajores.valora.xyz
   description: Staging (Celo Alfajores and other testnets)
 tags:
-- name: hooks
+- name: Hooks
   description: Divvi Hooks API (positions and shortcuts), served under /hooks-api
 paths:
   /hooks-api/getPositions:
     get:
       operationId: getPositions
       tags:
-      - hooks
+      - Hooks
       summary: Get DeFi positions
       description: Returns app-token and contract positions (DeFi holdings) detected by position-pricing hooks, optionally filtered to a wallet address and app ids.
       parameters:
@@ -70,7 +70,7 @@ paths:
     get:
       operationId: getEarnPositions
       tags:
-      - hooks
+      - Hooks
       summary: Get positions for the Earn feature
       parameters:
       - $ref: '#/components/parameters/networkIds'
@@ -111,7 +111,7 @@ paths:
       operationId: getShortcuts
       deprecated: true
       tags:
-      - hooks
+      - Hooks
       summary: List shortcuts (deprecated)
       description: Deprecated route (celo-mainnet only) — use /hooks-api/v2/getShortcuts.
       responses:
@@ -125,7 +125,7 @@ paths:
     get:
       operationId: getShortcutsV2
       tags:
-      - hooks
+      - Hooks
       summary: List shortcuts
       description: Returns shortcut definitions (claim, deposit, withdraw, swap-deposit actions) available on the requested networks.
       parameters:
@@ -156,7 +156,7 @@ paths:
     post:
       operationId: triggerShortcut
       tags:
-      - hooks
+      - Hooks
       summary: Trigger a shortcut
       description: Executes a shortcut's trigger and returns the transaction(s) the user must sign. Additional body fields are required per-shortcut (triggerInputShape), e.g. tokens for deposit/withdraw shortcuts.
       requestBody:
@@ -233,32 +233,28 @@ components:
           enum:
           - claimable
       additionalProperties: true
-    NetworkId:
-      type: string
-      enum:
-      - celo-mainnet
-      - celo-alfajores
-      - ethereum-mainnet
-      - ethereum-sepolia
-      - arbitrum-one
-      - arbitrum-sepolia
-      - op-mainnet
-      - op-sepolia
-      - polygon-pos-mainnet
-      - polygon-pos-amoy
-      - base-mainnet
-      - base-sepolia
-    ShortcutsResponse:
+    Shortcut:
       type: object
+      description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
       properties:
-        message:
+        id:
           type: string
-          enum:
-          - OK
-        data:
+        name:
+          type: string
+        description:
+          type: string
+        networkIds:
           type: array
           items:
-            $ref: '#/components/schemas/Shortcut'
+            $ref: '#/components/schemas/NetworkId'
+        category:
+          type: string
+          enum:
+          - claim
+          - deposit
+          - withdraw
+          - swap-deposit
+      additionalProperties: true
     Position:
       type: object
       description: DeFi position (app-token or contract-position) priced by a hook.
@@ -327,6 +323,21 @@ components:
           type: string
         manageUrl:
           type: string
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
     Transaction:
       type: object
       required:
@@ -352,28 +363,17 @@ components:
         estimatedGasUse:
           type: string
           description: Serialized bigint (wei).
-    Shortcut:
+    ShortcutsResponse:
       type: object
-      description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        networkIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkId'
-        category:
+        message:
           type: string
           enum:
-          - claim
-          - deposit
-          - withdraw
-          - swap-deposit
-      additionalProperties: true
+          - OK
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shortcut'
   parameters:
     networkIds:
       name: networkIds

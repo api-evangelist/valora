@@ -205,34 +205,42 @@ paths:
           description: Unknown shortcut id or invalid trigger input.
 components:
   schemas:
-    PositionToken:
+    Transaction:
       type: object
-      description: Token held by a position (base token or nested app token).
+      required:
+      - networkId
+      - from
+      - to
+      - data
       properties:
-        tokenId:
-          type: string
-        address:
-          type: string
         networkId:
           $ref: '#/components/schemas/NetworkId'
-        symbol:
+        from:
           type: string
-        decimals:
-          type: integer
-        priceUsd:
+        to:
           type: string
-        balance:
+        data:
           type: string
-        type:
+        value:
+          type: string
+          description: Serialized bigint (wei).
+        gas:
+          type: string
+          description: Serialized bigint (wei).
+        estimatedGasUse:
+          type: string
+          description: Serialized bigint (wei).
+    ShortcutsResponse:
+      type: object
+      properties:
+        message:
           type: string
           enum:
-          - base-token
-          - app-token
-        category:
-          type: string
-          enum:
-          - claimable
-      additionalProperties: true
+          - OK
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shortcut'
     Shortcut:
       type: object
       description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
@@ -255,6 +263,21 @@ components:
           - withdraw
           - swap-deposit
       additionalProperties: true
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
     Position:
       type: object
       description: DeFi position (app-token or contract-position) priced by a hook.
@@ -323,57 +346,34 @@ components:
           type: string
         manageUrl:
           type: string
-    NetworkId:
-      type: string
-      enum:
-      - celo-mainnet
-      - celo-alfajores
-      - ethereum-mainnet
-      - ethereum-sepolia
-      - arbitrum-one
-      - arbitrum-sepolia
-      - op-mainnet
-      - op-sepolia
-      - polygon-pos-mainnet
-      - polygon-pos-amoy
-      - base-mainnet
-      - base-sepolia
-    Transaction:
+    PositionToken:
       type: object
-      required:
-      - networkId
-      - from
-      - to
-      - data
+      description: Token held by a position (base token or nested app token).
       properties:
+        tokenId:
+          type: string
+        address:
+          type: string
         networkId:
           $ref: '#/components/schemas/NetworkId'
-        from:
+        symbol:
           type: string
-        to:
+        decimals:
+          type: integer
+        priceUsd:
           type: string
-        data:
+        balance:
           type: string
-        value:
-          type: string
-          description: Serialized bigint (wei).
-        gas:
-          type: string
-          description: Serialized bigint (wei).
-        estimatedGasUse:
-          type: string
-          description: Serialized bigint (wei).
-    ShortcutsResponse:
-      type: object
-      properties:
-        message:
+        type:
           type: string
           enum:
-          - OK
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shortcut'
+          - base-token
+          - app-token
+        category:
+          type: string
+          enum:
+          - claimable
+      additionalProperties: true
   parameters:
     networkIds:
       name: networkIds

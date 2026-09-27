@@ -10,20 +10,17 @@
     "valora-tokens-api-openapi.yml",
     "valora-transactions-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "valora-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "superseded outputs removed: valora-nf-ts-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 5 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "valora-hooks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "valora-nf-ts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "valora-nfts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "valora-swaps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "valora-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "valora-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"

@@ -49,21 +49,6 @@ paths:
           description: Invalid or unsupported swap request.
 components:
   schemas:
-    NetworkId:
-      type: string
-      enum:
-      - celo-mainnet
-      - celo-alfajores
-      - ethereum-mainnet
-      - ethereum-sepolia
-      - arbitrum-one
-      - arbitrum-sepolia
-      - op-mainnet
-      - op-sepolia
-      - polygon-pos-mainnet
-      - polygon-pos-amoy
-      - base-mainnet
-      - base-sepolia
     SwapQuoteResponse:
       type: object
       properties:
@@ -89,6 +74,21 @@ components:
                   message:
                     type: string
                   details: {}
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
     SwapQuoteRequest:
       type: object
       required:

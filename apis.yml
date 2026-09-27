@@ -70,7 +70,7 @@ tags_raw:
 - Mobile
 apis:
 - aid: valora:valora-hooks-api
-  name: Valora hooks API
+  name: Valora Hooks API
   description: Divvi Hooks API (positions and shortcuts), served under /hooks-api
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
@@ -84,7 +84,7 @@ apis:
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
 - aid: valora:valora-swaps-api
-  name: Valora swaps API
+  name: Valora Swaps API
   description: Swap quotes
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
@@ -98,7 +98,7 @@ apis:
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
 - aid: valora:valora-tokens-api
-  name: Valora tokens API
+  name: Valora Tokens API
   description: Token metadata and prices
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz
@@ -112,7 +112,7 @@ apis:
   - type: Documentation
     url: https://github.com/divvi-xyz/hooks/tree/main/docs
 - aid: valora:valora-transactions-api
-  name: Valora transactions API
+  name: Valora Transactions API
   description: Transaction simulation
   humanURL: https://github.com/divvi-xyz/hooks
   baseURL: https://api.mainnet.valora.xyz

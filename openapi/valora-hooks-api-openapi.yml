@@ -205,6 +205,67 @@ paths:
           description: Unknown shortcut id or invalid trigger input.
 components:
   schemas:
+    Shortcut:
+      type: object
+      description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        networkIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetworkId'
+        category:
+          type: string
+          enum:
+          - claim
+          - deposit
+          - withdraw
+          - swap-deposit
+      additionalProperties: true
+    PositionToken:
+      type: object
+      description: Token held by a position (base token or nested app token).
+      properties:
+        tokenId:
+          type: string
+        address:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        priceUsd:
+          type: string
+        balance:
+          type: string
+        type:
+          type: string
+          enum:
+          - base-token
+          - app-token
+        category:
+          type: string
+          enum:
+          - claimable
+      additionalProperties: true
+    DisplayProps:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        manageUrl:
+          type: string
     Transaction:
       type: object
       required:
@@ -241,28 +302,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Shortcut'
-    Shortcut:
-      type: object
-      description: Shortcut definition (onTrigger and triggerInputShape are excluded from serialization).
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        networkIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetworkId'
-        category:
-          type: string
-          enum:
-          - claim
-          - deposit
-          - withdraw
-          - swap-deposit
-      additionalProperties: true
     NetworkId:
       type: string
       enum:
@@ -334,45 +373,6 @@ components:
           items:
             type: string
           description: app-token only.
-      additionalProperties: true
-    DisplayProps:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        imageUrl:
-          type: string
-        manageUrl:
-          type: string
-    PositionToken:
-      type: object
-      description: Token held by a position (base token or nested app token).
-      properties:
-        tokenId:
-          type: string
-        address:
-          type: string
-        networkId:
-          $ref: '#/components/schemas/NetworkId'
-        symbol:
-          type: string
-        decimals:
-          type: integer
-        priceUsd:
-          type: string
-        balance:
-          type: string
-        type:
-          type: string
-          enum:
-          - base-token
-          - app-token
-        category:
-          type: string
-          enum:
-          - claimable
       additionalProperties: true
   parameters:
     networkIds:

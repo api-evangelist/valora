@@ -49,31 +49,6 @@ paths:
           description: Invalid or unsupported swap request.
 components:
   schemas:
-    SwapQuoteResponse:
-      type: object
-      properties:
-        unvalidatedSwapTransaction:
-          type: object
-          description: Proposed swap transaction (from, to, data, value, gas, estimatedGasUse, allowanceTarget, simulationStatus, ...).
-          additionalProperties: true
-        details:
-          type: object
-          properties:
-            swapProvider:
-              type: string
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              provider:
-                type: string
-              error:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  details: {}
     NetworkId:
       type: string
       enum:
@@ -124,3 +99,28 @@ components:
           type: string
         enableAppFee:
           type: boolean
+    SwapQuoteResponse:
+      type: object
+      properties:
+        unvalidatedSwapTransaction:
+          type: object
+          description: Proposed swap transaction (from, to, data, value, gas, estimatedGasUse, allowanceTarget, simulationStatus, ...).
+          additionalProperties: true
+        details:
+          type: object
+          properties:
+            swapProvider:
+              type: string
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              provider:
+                type: string
+              error:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  details: {}

@@ -68,37 +68,6 @@ paths:
           description: Valid but unsupported request (e.g. unsupported networkId).
 components:
   schemas:
-    SimulatedTransaction:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - success
-          - failure
-        blockNumber:
-          type: string
-        gasNeeded:
-          type: number
-        gasUsed:
-          type: number
-        gasPrice:
-          type: string
-    NetworkId:
-      type: string
-      enum:
-      - celo-mainnet
-      - celo-alfajores
-      - ethereum-mainnet
-      - ethereum-sepolia
-      - arbitrum-one
-      - arbitrum-sepolia
-      - op-mainnet
-      - op-sepolia
-      - polygon-pos-mainnet
-      - polygon-pos-amoy
-      - base-mainnet
-      - base-sepolia
     Transaction:
       type: object
       required:
@@ -124,3 +93,34 @@ components:
         estimatedGasUse:
           type: string
           description: Serialized bigint (wei).
+    NetworkId:
+      type: string
+      enum:
+      - celo-mainnet
+      - celo-alfajores
+      - ethereum-mainnet
+      - ethereum-sepolia
+      - arbitrum-one
+      - arbitrum-sepolia
+      - op-mainnet
+      - op-sepolia
+      - polygon-pos-mainnet
+      - polygon-pos-amoy
+      - base-mainnet
+      - base-sepolia
+    SimulatedTransaction:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - success
+          - failure
+        blockNumber:
+          type: string
+        gasNeeded:
+          type: number
+        gasUsed:
+          type: number
+        gasPrice:
+          type: string

@@ -227,81 +227,6 @@ components:
           - withdraw
           - swap-deposit
       additionalProperties: true
-    PositionToken:
-      type: object
-      description: Token held by a position (base token or nested app token).
-      properties:
-        tokenId:
-          type: string
-        address:
-          type: string
-        networkId:
-          $ref: '#/components/schemas/NetworkId'
-        symbol:
-          type: string
-        decimals:
-          type: integer
-        priceUsd:
-          type: string
-        balance:
-          type: string
-        type:
-          type: string
-          enum:
-          - base-token
-          - app-token
-        category:
-          type: string
-          enum:
-          - claimable
-      additionalProperties: true
-    DisplayProps:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        imageUrl:
-          type: string
-        manageUrl:
-          type: string
-    Transaction:
-      type: object
-      required:
-      - networkId
-      - from
-      - to
-      - data
-      properties:
-        networkId:
-          $ref: '#/components/schemas/NetworkId'
-        from:
-          type: string
-        to:
-          type: string
-        data:
-          type: string
-        value:
-          type: string
-          description: Serialized bigint (wei).
-        gas:
-          type: string
-          description: Serialized bigint (wei).
-        estimatedGasUse:
-          type: string
-          description: Serialized bigint (wei).
-    ShortcutsResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          enum:
-          - OK
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shortcut'
     NetworkId:
       type: string
       enum:
@@ -373,6 +298,81 @@ components:
           items:
             type: string
           description: app-token only.
+      additionalProperties: true
+    ShortcutsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          enum:
+          - OK
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shortcut'
+    Transaction:
+      type: object
+      required:
+      - networkId
+      - from
+      - to
+      - data
+      properties:
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        from:
+          type: string
+        to:
+          type: string
+        data:
+          type: string
+        value:
+          type: string
+          description: Serialized bigint (wei).
+        gas:
+          type: string
+          description: Serialized bigint (wei).
+        estimatedGasUse:
+          type: string
+          description: Serialized bigint (wei).
+    DisplayProps:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        manageUrl:
+          type: string
+    PositionToken:
+      type: object
+      description: Token held by a position (base token or nested app token).
+      properties:
+        tokenId:
+          type: string
+        address:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        symbol:
+          type: string
+        decimals:
+          type: integer
+        priceUsd:
+          type: string
+        balance:
+          type: string
+        type:
+          type: string
+          enum:
+          - base-token
+          - app-token
+        category:
+          type: string
+          enum:
+          - claimable
       additionalProperties: true
   parameters:
     networkIds:
